@@ -266,7 +266,7 @@ public class TestLobby : MonoBehaviour
     {
         try
         {
-            hostLobby = await LobbyService.Instance.UpdateLobbyAsync(hostLobby.Id, AuthenticationService.Instance.PlayerId, new UpdateLobbyOptions
+            hostLobby = await LobbyService.Instance.UpdateLobbyAsync(hostLobby.Id, new UpdateLobbyOptions
             {
                 HostId = joinedLobby.Players[1].Id
             });

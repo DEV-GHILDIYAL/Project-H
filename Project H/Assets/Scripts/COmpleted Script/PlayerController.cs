@@ -102,6 +102,7 @@ public class PlayerController : MonoBehaviour
                     {
                         // Stop tracking the left finger
                         leftFingerId = -1;
+                        moveInput = Vector2.zero;
                         // Debug.Log("Stopped tracking left finger");
                     }
                     else if (t.fingerId == rightFingerId)
