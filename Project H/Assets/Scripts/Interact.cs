@@ -20,6 +20,7 @@ public class Interact : MonoBehaviour
     public Machine machine;
     public GameManager gameManager;
     public PickUpAndDrop pickUpAndDrop;
+    public PoisionBox poisionBox;
 
     private void Start()
     {
@@ -54,10 +55,11 @@ public class Interact : MonoBehaviour
 
     public void DoInteract()
     {
-        GameObject hitObj = hit.collider.gameObject;
         if (isInteracting)
         {
+            GameObject hitObj = hit.collider.gameObject;
             hit.collider.TryGetComponent(out Interactable interactable);
+
             if(hitObj.tag == "knief")
             {
                 if (!gameManager.isKniefPicked)
@@ -73,12 +75,20 @@ public class Interact : MonoBehaviour
                 {
                     machine.interactWithMachine();
                 }
+                else if(hitObj.tag == "PoisionBox")
+                {
+                    poisionBox.activateBox();
+                }
             }
             else
             {
                 if (pickUpAndDrop.isPicked == false)
                     pickUpAndDrop.Pick(hit.collider.gameObject);
             }
+        }
+        else
+        {
+            Debug.Log("Iski bhen ki maze maze");
         }
     }
 }

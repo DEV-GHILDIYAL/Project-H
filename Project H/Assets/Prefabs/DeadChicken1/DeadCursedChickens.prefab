@@ -820,7 +820,7 @@ GameObject:
   - component: {fileID: 8026746245653561532}
   m_Layer: 6
   m_Name: DeadCursedChickens
-  m_TagString: DeadCursedChicken
+  m_TagString: DeadChicken
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

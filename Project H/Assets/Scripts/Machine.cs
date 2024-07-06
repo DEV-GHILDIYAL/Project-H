@@ -10,7 +10,10 @@ public class Machine : MonoBehaviour
     public int collectItem;
     public PickUpAndDrop pickUpAndDrop;
     public bool isMachineActivate;
+    public Transform dropPoint;
 
+    bool isChickenCursed;
+    GameObject chickenToDetect;
     private void Start()
     {
         isMachineActivate = false;
@@ -29,13 +32,56 @@ public class Machine : MonoBehaviour
             ActivateMachine();
         } else if (pickUpAndDrop.objPicked != null && pickUpAndDrop.objPicked.CompareTag("DeadChicken"))
         {
-            CheckIfCursedOrNot();
+            if (isMachineActivate)
+            {
+                chickenToDetect = pickUpAndDrop.objPicked;
+                StartCoroutine(CheckIfCursedOrNot());
+            }
+            else
+            {
+                Debug.Log("Please activate machine first");
+            }
+        }
+        else
+        {
+            Debug.Log("None of the above");
         }
     }
 
-    private void CheckIfCursedOrNot()
+    private IEnumerator CheckIfCursedOrNot()
     {
-        throw new NotImplementedException();
+        Debug.Log("Checking if the dead chicken is cursed...");
+        yield return new WaitForSeconds(5);
+
+        SpawnChicken();
+    }
+
+    private void SpawnChicken()
+    {
+        Debug.Log("Spawning a chicken...");
+        if(chickenToDetect != null)
+        {
+            if(chickenToDetect.name == "DeadCursedChickens(Clone)")
+            {
+                pickUpAndDrop.objPicked.transform.position = dropPoint.position;
+                pickUpAndDrop.objPicked.SetActive(true);
+                pickUpAndDrop.objPicked.tag = "DeadCursedChicken";
+                pickUpAndDrop.objPicked = null;
+                pickUpAndDrop.isPicked = false;
+                Debug.Log("Dropped");
+            }else if(chickenToDetect.name == "NormalCursedChickens(Clone)")
+            {
+                Debug.Log("Your Chicken is normal");
+            }
+            else
+            {
+                Debug.Log("What is this....");
+            }
+        }
+        else
+        {
+            Debug.Log("Hello");
+        }
     }
 
     public void ActivateMachine()

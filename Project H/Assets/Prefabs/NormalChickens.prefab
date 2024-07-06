@@ -631,10 +631,10 @@ MonoBehaviour:
   playerInAttackRange: 0
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   whatIsPlayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
 --- !u!114 &2680181450562524695
 MonoBehaviour:
   m_ObjectHideFlags: 0

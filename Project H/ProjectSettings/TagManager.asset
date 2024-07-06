@@ -8,6 +8,11 @@ TagManager:
   - Machine
   - CursedChicken
   - knief
+  - DeadCursedChicken
+  - DeadNormalChicken
+  - DeadChicken
+  - PoisionBag
+  - PoisionBox
   layers:
   - Default
   - TransparentFX
