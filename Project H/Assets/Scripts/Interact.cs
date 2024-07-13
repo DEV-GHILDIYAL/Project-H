@@ -21,6 +21,7 @@ public class Interact : MonoBehaviour
     public GameManager gameManager;
     public PickUpAndDrop pickUpAndDrop;
     public PoisionBox poisionBox;
+    public BornFire bornfire;
 
     private void Start()
     {
@@ -77,7 +78,11 @@ public class Interact : MonoBehaviour
                 }
                 else if(hitObj.tag == "PoisionBox")
                 {
-                    poisionBox.activateBox();
+                    poisionBox.interactWithPoision();
+                }
+                else if(hitObj.tag == "BornFire")
+                {
+                    bornfire.interactWithBornfire();
                 }
             }
             else

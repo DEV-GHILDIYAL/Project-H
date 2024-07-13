@@ -9,6 +9,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private CharacterController characterController;
 
+    [Header("Gravity & Jumping")]
+    public float stickToGroundForce = 10;
+    public float gravity = 9.81f;
+    float verticalVelocity;
+
+    [Header("Ground Check")]
+    public Transform groundCheck;
+    public LayerMask groundLayers;
+    public float groundCheckRadius;
+    bool grounded;
+
     // Player settings
     [SerializeField] private float cameraSensitivity;
     [SerializeField] private float moveSpeed;
@@ -44,11 +55,16 @@ public class PlayerController : MonoBehaviour
         cb = GetComponent<CameraBobbing>();
     }
 
+    private void FixedUpdate()
+    {
+        grounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayers);
+    }
     // Update is called once per frame
     void Update()
     {
         // Handles input
         GetTouchInput();
+        Gravity();
 
         if (rightFingerId != -1) {
             // Ony look around if the right finger is being tracked
@@ -162,6 +178,17 @@ public class PlayerController : MonoBehaviour
         Vector2 movementDirection = moveInput.normalized * moveSpeed * Time.deltaTime;
         // Move relatively to the local transform's direction
         characterController.Move(transform.right * movementDirection.x + transform.forward * movementDirection.y);
+
+    }
+
+    void Gravity()
+    {
+
+        if (grounded && verticalVelocity <= 0) verticalVelocity = -stickToGroundForce * Time.deltaTime;
+        else verticalVelocity -= gravity * Time.deltaTime;
+
+        Vector3 verticalMovement = transform.up * verticalVelocity;
+        characterController.Move(verticalMovement * Time.deltaTime);
     }
 
 }

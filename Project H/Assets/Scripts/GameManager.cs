@@ -6,6 +6,13 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Game Flow")]
+    public int numberOfCursedChickenBurned = 0;
+    public int numberOfRequiredChicken = 9;
+    public bool isWin;
+    public bool isLoose;
+    public bool isGameOver;
+
     [Header("Knief")]
     public bool isKniefPicked;
     public GameObject knief;
@@ -29,6 +36,11 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        isWin = false;
+        isLoose = false;
+        isGameOver = false;
+
+        numberOfCursedChickenBurned = 0;
         isKniefPicked = false;
         knief.SetActive(false);
         kniefButton.SetActive(false);
